@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-cyan: #00f0ff;
+  --color-brand-purple: #8a2be2;
+  --color-brand-dark: #0f172a;
+  --color-brand-darker: #020617;
+  --color-glass-bg: rgba(15, 23, 42, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased overflow-x-hidden;
+    background: radial-gradient(circle at 50% -20%, #1e1b4b, #020617 80%);
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .glassmorphism {
+    @apply backdrop-blur-md bg-slate-900/40 border border-white/10 shadow-xl;
+  }
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  }
+  .box-glow {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+  }
+}

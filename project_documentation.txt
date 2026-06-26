@@ -1,0 +1,55 @@
+# Project Documentation: 3D Responsive E-Commerce Website
+
+## Overview
+This project is a modern, highly responsive e-commerce web application built with React and Vite. It integrates immersive 3D graphics and smooth animations to provide a premium user experience. The application features a global 3D background, dynamic UI components with glassmorphism styling, and seamless client-side routing.
+
+## Technology Stack
+- **Frontend Framework**: React 19 (via Vite)
+- **Routing**: React Router DOM (v7)
+- **Styling**: Tailwind CSS (v4)
+- **3D Graphics**: Three.js, React Three Fiber, React Three Drei
+- **3D Animation/Sequencing**: Theatre.js
+- **UI Animations**: Framer Motion
+- **Icons**: Lucide React
+
+## Project Structure
+The source code is primarily contained within the `src/` directory, organized as follows:
+- **`App.jsx`**: The root component that sets up the `BrowserRouter`, global layout, and routing logic.
+- **`components/`**: Reusable UI and 3D components.
+  - `Background3D.jsx`: Manages the persistent Three.js canvas in the background using React Three Fiber.
+  - `Scene.jsx`: Contains the actual 3D objects and environment setup.
+  - `Navbar.jsx` & `Footer.jsx`: Global layout components.
+  - `HeroTheatre.jsx`: The main hero section of the landing page, likely utilizing Theatre.js for sequenced 3D animations.
+  - `ProductGrid.jsx`: Component for displaying featured products on the home page.
+- **`pages/`**: View components representing distinct routes.
+  - `Home.jsx`: The main landing page (`/`), composing the `HeroTheatre` and `ProductGrid`.
+  - `Explore.jsx`: The dedicated catalog page (`/explore`) featuring categorized products.
+
+## Recent Changes & Implementation Details
+
+1. **Architecture Refactoring for Persistent 3D Scene**
+   - Refactored `App.jsx` to ensure the `Background3D` component is placed outside the `<Routes>` switch.
+   - This prevents the WebGL canvas from unmounting and remounting when navigating between pages, providing a seamless, continuous 3D experience without performance hiccups or loading flashes.
+   - The 3D canvas is positioned with CSS (`fixed inset-0 -z-10 pointer-events-none`) to act as a responsive global background.
+
+2. **Client-Side Routing Implementation**
+   - Integrated `react-router-dom`.
+   - Set up the initial routes for the Home (`/`) and Explore (`/explore`) pages.
+   - Ensured the "Explore Products" button on the home page correctly navigates to the new catalog view without triggering a full page reload.
+
+3. **Development of the Explore Page (`Explore.jsx`)**
+   - Created a new view for browsing the full product catalog.
+   - Organized products into distinct categories: "Premium Laptops", "Smart Wearables", and "High-Fidelity Audio".
+   - **UI/UX Enhancements**:
+     - Implemented `framer-motion` for dynamic entrance animations (fade-ins, scroll reveals).
+     - Designed `GridCard` components with modern "glassmorphism" aesthetics (backdrop blur, semi-transparent backgrounds).
+     - Added micro-interactions, such as hover effects scaling product images and revealing subtle gradient overlays.
+     - Utilized `lucide-react` icons (Star, ShoppingCart) to enrich the product card UI.
+
+4. **Performance Optimization**
+   - The `Background3D` component uses `<PerformanceMonitor>` from `@react-three/drei` to automatically scale the device pixel ratio (dpr) and quality based on the user's device capabilities, ensuring smooth framerates on both high-end desktops and mobile devices.
+
+## Future Roadmap / Next Steps
+- Implement state management (e.g., Context API or Zustand) for the shopping cart.
+- Connect the frontend to a backend API to fetch real product data instead of relying on mock data.
+- Enhance the 3D scene with more interactive elements tied to scroll position or cursor movement.
