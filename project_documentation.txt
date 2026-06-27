@@ -49,7 +49,12 @@ The source code is primarily contained within the `src/` directory, organized as
 4. **Performance Optimization**
    - The `Background3D` component uses `<PerformanceMonitor>` from `@react-three/drei` to automatically scale the device pixel ratio (dpr) and quality based on the user's device capabilities, ensuring smooth framerates on both high-end desktops and mobile devices.
 
+5. **Shopping Cart & WhatsApp Checkout**
+   - Implemented global state management using Zustand (`useCartStore.js`) for cart logic (`addToCart`, `removeFromCart`, `decreaseQuantity`, `clearCart`).
+   - Integrated the cart state with the `Navbar` to dynamically display the total item count.
+   - Built a highly prominent, animated `Cart.jsx` modal with Framer Motion, featuring a centered glassmorphism design and deep background blur.
+   - Implemented a "Click to Chat" WhatsApp checkout feature that formats the cart contents (name, quantity, price) and total amount into a WhatsApp message payload.
+
 ## Future Roadmap / Next Steps
-- Implement state management (e.g., Context API or Zustand) for the shopping cart.
 - Connect the frontend to a backend API to fetch real product data instead of relying on mock data.
 - Enhance the 3D scene with more interactive elements tied to scroll position or cursor movement.
