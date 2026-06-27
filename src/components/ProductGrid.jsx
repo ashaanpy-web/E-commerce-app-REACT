@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Star } from 'lucide-react';
+import { useCartStore } from '../store/useCartStore';
 
 const products = [
   {
@@ -38,6 +39,8 @@ const products = [
 ];
 
 const ProductCard = ({ product, index }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -74,6 +77,7 @@ const ProductCard = ({ product, index }) => {
         <div className="mt-auto flex items-center justify-between">
           <span className="text-xl font-bold text-white">{product.price}</span>
           <motion.button 
+            onClick={() => addToCart(product)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="bg-white/10 hover:bg-brand-cyan hover:text-slate-950 p-2 rounded-full transition-colors box-glow"

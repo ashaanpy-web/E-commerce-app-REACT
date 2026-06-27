@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Menu, X, Cpu } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useCartStore } from '../store/useCartStore';
+import Cart from './Cart';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  
+  const cart = useCartStore((state) => state.cart);
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <motion.nav 
@@ -33,14 +39,17 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-6">
             <motion.button 
+              onClick={() => setIsCartOpen(true)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className="text-slate-300 hover:text-brand-cyan transition-colors relative"
             >
               <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-brand-purple text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                2
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-purple text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  {totalItems}
+                </span>
+              )}
             </motion.button>
             <motion.button 
               whileHover={{ scale: 1.05 }}
@@ -53,11 +62,13 @@ const Navbar = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-4">
-             <button className="text-slate-300 relative">
+             <button onClick={() => setIsCartOpen(true)} className="text-slate-300 relative hover:text-brand-cyan transition-colors">
               <ShoppingCart className="h-6 w-6" />
-              <span className="absolute -top-2 -right-2 bg-brand-purple text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                2
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-purple text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                  {totalItems}
+                </span>
+              )}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -92,6 +103,9 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* Cart Modal */}
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </motion.nav>
   );
 };

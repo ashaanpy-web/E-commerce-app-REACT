@@ -15,7 +15,7 @@ const Background3D = () => {
           gl={{ antialias: false, powerPreference: "high-performance", precision: "lowp" }}
           camera={{ position: [0, 0, 8], fov: 45 }}
         >
-          {/* 👈 Yeh line screen par exact FPS, MS, aur MB ka meter show karegi */}
+
           <Stats />
 
           <PerformanceMonitor

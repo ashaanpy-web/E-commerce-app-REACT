@@ -18,7 +18,24 @@ export const useCartStore = create((set) => ({
         return { cart: [...state.cart, { ...product, quantity: 1 }] };
     }),
 
-    // 2. Remove Product Logic
+    // 2. Decrease Quantity Logic
+    decreaseQuantity: (productId) => set((state) => {
+        const existingItem = state.cart.find((item) => item.id === productId);
+        if (existingItem && existingItem.quantity > 1) {
+            return {
+                cart: state.cart.map((item) =>
+                    item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
+                ),
+            };
+        } else if (existingItem && existingItem.quantity === 1) {
+             return {
+                 cart: state.cart.filter((item) => item.id !== productId),
+             };
+        }
+        return state;
+    }),
+
+    // 3. Remove Product Logic
     removeFromCart: (productId) => set((state) => ({
         cart: state.cart.filter((item) => item.id !== productId),
     })),
