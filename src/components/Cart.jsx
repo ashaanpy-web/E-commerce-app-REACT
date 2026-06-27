@@ -44,7 +44,7 @@ const Cart = ({ isOpen, onClose }) => {
           />
 
           {/* Centered Modal */}
-          <div className="fixed inset-0 pt-24 flex items-center justify-center z-[70] pointer-events-none px-4">
+          <div className="fixed inset-0 pt-20 flex items-center justify-center z-[70] pointer-events-none px-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -55,9 +55,10 @@ const Cart = ({ isOpen, onClose }) => {
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="absolute top-5 right-5 text-slate-400 hover:text-white transition-all hover:scale-110 rounded-full hover:bg-white/10 p-2 z-10 bg-black/20"
+                className="absolute top-5 right-5 flex items-center gap-1.5 bg-white/10 text-slate-300 hover:text-white hover:bg-red-500/80 transition-all rounded-full px-4 py-2 z-10 border border-white/10 shadow-lg"
               >
-                <X className="w-6 h-6" />
+                <span className="text-sm font-bold tracking-wide">CLOSE</span>
+                <X className="w-4 h-4 stroke-[3]" />
               </button>
 
               {/* Header */}
